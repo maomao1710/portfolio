@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amo Zhou — Illustrator, Animator, Tattoo Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E4;
+    --cream-dark: #EDE7D6;
+    --brown: #2A2018;
+    --brown-mid: #7A6E5F;
+    --brown-light: #B5A99A;
+    --sage: #8BAF9A;
+    --rose: #D4A5A0;
+    --border: rgba(42, 32, 24, 0.12);
+    --serif: 'Instrument Serif', serif;
+    --sans: 'DM Sans', sans-serif;
+    --hand: 'Caveat', cursive;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--brown);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245, 240, 228, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--brown);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--hand);
+    font-size: 1.1rem;
+    color: var(--brown-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--brown); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+  }
+  .dots-bg {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(42,32,24,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .hero-eyebrow {
+    font-family: var(--hand);
+    font-size: 1.2rem;
+    color: var(--brown-mid);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    line-height: 1.05;
+    color: var(--brown);
+    margin-bottom: 0.5rem;
+  }
+  .hero-title em { font-style: italic; color: var(--sage); }
+  .hero-subtitle {
+    font-family: var(--hand);
+    font-size: 1.4rem;
+    color: var(--brown-mid);
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--hand);
+    font-size: 1rem;
+    color: var(--brown-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: float 2.5s ease-in-out infinite;
+  }
+  .scroll-line { width: 1px; height: 40px; background: var(--brown-light); }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+  }
+
+  /* SECTIONS */
+  .section-wrap {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-wrap-alt {
+    background: var(--cream-dark);
+    padding: 6rem 0;
+  }
+  .section-wrap-alt .inner { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--brown);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .section-title:hover { color: var(--sage); }
+  .section-label {
+    font-family: var(--hand);
+    font-size: 1rem;
+    color: var(--brown-light);
+  }
+
+  /* MASONRY GRID */
+  .illus-grid { columns: 3; column-gap: 1.25rem; }
+  .illus-item {
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .illus-item img {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    transition: transform 0.4s ease;
+    background: var(--cream-dark);
+    min-height: 120px;
+  }
+  .illus-item:hover img { transform: scale(1.03); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    background: var(--cream-dark);
+  }
+  .project-card:hover { border-color: var(--brown-light); }
+  .project-thumb { aspect-ratio: 4/3; overflow: hidden; background: var(--cream-dark); }
+  .project-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .project-card:hover .project-thumb img { transform: scale(1.04); }
+  .project-info { padding: 1.25rem 1.5rem; }
+  .project-tag { font-family: var(--hand); font-size: 0.95rem; color: var(--sage); margin-bottom: 0.3rem; }
+  .project-name { font-family: var(--serif); font-size: 1.3rem; color: var(--brown); margin-bottom: 0.4rem; }
+  .project-desc { font-size: 0.88rem; color: var(--brown-mid); line-height: 1.6; }
+
+  /* VIDEO */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .video-card { border-radius: 6px; overflow: hidden; cursor: pointer; }
+  .video-thumb {
+    aspect-ratio: 16/9;
+    background: var(--cream-dark);
+    position: relative;
+    overflow: hidden;
+  }
+  .video-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: rgba(245,240,228,0.9);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+    z-index: 2;
+  }
+  .video-card:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); }
+  .play-triangle {
+    width: 0; height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 18px solid var(--brown);
+    margin-left: 4px;
+  }
+  .video-label { padding: 0.85rem 1rem; background: var(--cream-dark); }
+  .video-title { font-family: var(--serif); font-size: 1.1rem; color: var(--brown); }
+  .video-meta { font-family: var(--hand); font-size: 0.9rem; color: var(--brown-light); }
+
+  /* ABOUT */
+  .about-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+  .about-portrait { aspect-ratio: 3/4; border-radius: 4px; overflow: hidden; background: var(--cream-dark); }
+  .about-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-name { font-family: var(--serif); font-size: 2.8rem; font-style: italic; margin-bottom: 0.5rem; }
+  .about-role { font-family: var(--hand); font-size: 1.2rem; color: var(--sage); margin-bottom: 2rem; }
+  .about-text { font-size: 1rem; color: var(--brown-mid); line-height: 1.9; margin-bottom: 1.5rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .tag {
+    font-family: var(--hand); font-size: 1rem;
+    padding: 0.35rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    color: var(--brown-mid);
+    background: var(--cream-dark);
+  }
+  .contact-link {
+    display: inline-block;
+    font-family: var(--hand); font-size: 1.15rem;
+    color: var(--brown); text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--brown);
+    transition: color 0.2s, border-color 0.2s;
+    margin-top: 2.5rem;
+  }
+  .contact-link:hover { color: var(--sage); border-color: var(--sage); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--hand); font-size: 1rem;
+    color: var(--brown-light);
+  }
+
+  /* PROJECT MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(42, 32, 24, 0.6);
+    z-index: 200; display: none;
+    align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--cream); border-radius: 8px;
+    max-width: 800px; width: 100%;
+    max-height: 85vh; overflow-y: auto;
+    padding: 2.5rem; position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 1.25rem; right: 1.5rem;
+    font-family: var(--hand); font-size: 1.5rem;
+    background: none; border: none; cursor: pointer;
+    color: var(--brown-mid);
+  }
+  .modal-title { font-family: var(--serif); font-size: 2rem; font-style: italic; margin-bottom: 0.5rem; }
+  .modal-tag { font-family: var(--hand); color: var(--sage); font-size: 1rem; margin-bottom: 1.5rem; display: block; }
+  .modal-images { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .modal-img-slot { aspect-ratio: 4/3; background: var(--cream-dark); border-radius: 4px; overflow: hidden; }
+  .modal-img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modal-desc { font-size: 0.95rem; color: var(--brown-mid); line-height: 1.8; }
+
+  /* GALLERY OVERLAY */
+  .gallery-overlay {
+    position: fixed; inset: 0;
+    background: var(--cream);
+    z-index: 300; display: none;
+    flex-direction: column; overflow-y: auto;
+  }
+  .gallery-overlay.open { display: flex; }
+  .gallery-header {
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--cream); z-index: 1;
+  }
+  .gallery-title-display {
+    font-family: var(--serif); font-style: italic;
+    font-size: 2rem; color: var(--brown);
+  }
+  .gallery-close {
+    font-family: var(--hand); font-size: 1.1rem;
+    color: var(--brown-mid); background: none;
+    border: 1px solid var(--border);
+    border-radius: 2rem; padding: 0.4rem 1.2rem;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .gallery-close:hover { background: var(--cream-dark); }
+  .gallery-grid { padding: 2rem 3rem; columns: 3; column-gap: 1rem; }
+  .gallery-img { break-inside: avoid; margin-bottom: 1rem; border-radius: 4px; overflow: hidden; }
+  .gallery-img img { width: 100%; display: block; border-radius: 4px; transition: transform 0.3s; }
+  .gallery-img img:hover { transform: scale(1.02); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .section-wrap { padding: 4rem 1.5rem; }
+    .illus-grid { columns: 2; }
+    .gallery-grid { columns: 2; padding: 1.5rem; }
+    .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .about-portrait { aspect-ratio: 1/1; }
+    .modal-images { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-name">Amo Zhou</a>
+  <ul class="nav-links">
+    <li><a href="#illustrations">插画</a></li>
+    <li><a href="#projects">项目</a></li>
+    <li><a href="#animation">动画</a></li>
+    <li><a href="#tattoo">纹身</a></li>
+    <li><a href="#about">关于我</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="dots-bg"></div>
+  <p class="hero-eyebrow">Illustrator, Animator, Tattoo Artist ✦ Shenzhen</p>
+  <h1 class="hero-title">Amo Zhou<br><em>作品集</em></h1>
+  <p class="hero-subtitle">插画 · 动画 · 纹身</p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</div>
+
+<!-- ILLUSTRATIONS -->
+<section id="illustrations">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2 class="section-title" onclick="openGallery('illustrations', '插画')">插画</h2>
+      <span class="section-label">Illustrations</span>
+    </div>
+    <div class="illus-grid">
+      <!-- 替换 src 为你的图片路径，例如 images/illus-01.jpg -->
+      <div class="illus-item"><img src="images/illus-01.jpg" alt="Illustration 01"></div>
+      <div class="illus-item"><img src="images/illus-02.jpg" alt="Illustration 02"></div>
+      <div class="illus-item"><img src="images/illus-03.jpg" alt="Illustration 03"></div>
+      <div class="illus-item"><img src="images/illus-04.jpg" alt="Illustration 04"></div>
+      <div class="illus-item"><img src="images/illus-05.jpg" alt="Illustration 05"></div>
+      <div class="illus-item"><img src="images/illus-06.jpg" alt="Illustration 06"></div>
+      <div class="illus-item"><img src="images/illus-07.jpg" alt="Illustration 07"></div>
+      <div class="illus-item"><img src="images/illus-08.jpg" alt="Illustration 08"></div>
+      <div class="illus-item"><img src="images/illus-09.jpg" alt="Illustration 09"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="section-wrap-alt" id="projects">
+  <div class="inner">
+    <div class="section-header">
+      <h2 class="section-title" onclick="openGallery('projects', '项目')">项目</h2>
+      <span class="section-label">Projects</span>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card" onclick="openModal('modal1')">
+        <div class="project-thumb">
+          <!-- 替换为项目封面图 -->
+          <img src="images/project-01-cover.jpg" alt="Project 01">
+        </div>
+        <div class="project-info">
+          <p class="project-tag">丝巾设计</p>
+          <h3 class="project-name">春日图案系列</h3>
+          <p class="project-desc">以春天花卉为主题的丝巾图案设计，包含多款配色方案。</p>
+        </div>
+      </div>
+      <div class="project-card" onclick="openModal('modal2')">
+        <div class="project-thumb">
+          <img src="images/project-02-cover.jpg" alt="Project 02">
+        </div>
+        <div class="project-info">
+          <p class="project-tag">内衬图案</p>
+          <h3 class="project-name">几何纹样内衬</h3>
+          <p class="project-desc">服装内衬几何图案设计，融合东西方传统纹样元素。</p>
+        </div>
+      </div>
+      <div class="project-card" onclick="openModal('modal3')">
+        <div class="project-thumb">
+          <img src="images/project-03-cover.jpg" alt="Project 03">
+        </div>
+        <div class="project-info">
+          <p class="project-tag">品牌图案</p>
+          <h3 class="project-name">自然系列印花</h3>
+          <p class="project-desc">以自然元素为灵感的印花图案，适用于多种服装品类。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANIMATION -->
+<section id="animation">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2 class="section-title" onclick="openGallery('animation', '动画')">动画</h2>
+      <span class="section-label">Animation & Video</span>
+    </div>
+    <div class="video-grid">
+      <!-- 替换 src 为封面图，视频链接另外配置 -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="images/video-01-thumb.jpg" alt="Video 01">
+          <div class="play-btn"><div class="play-triangle"></div></div>
+        </div>
+        <div class="video-label">
+          <p class="video-title">动态图案 No.1</p>
+          <p class="video-meta">loop animation · 2024</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="images/video-02-thumb.jpg" alt="Video 02">
+          <div class="play-btn"><div class="play-triangle"></div></div>
+        </div>
+        <div class="video-label">
+          <p class="video-title">纹样生长实验</p>
+          <p class="video-meta">motion design · 2024</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="images/video-03-thumb.jpg" alt="Video 03">
+          <div class="play-btn"><div class="play-triangle"></div></div>
+        </div>
+        <div class="video-label">
+          <p class="video-title">插画动态演绎</p>
+          <p class="video-meta">animation · 2025</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TATTOO -->
+<div class="section-wrap-alt" id="tattoo">
+  <div class="inner">
+    <div class="section-header">
+      <h2 class="section-title" onclick="openGallery('tattoo', '纹身')">纹身</h2>
+      <span class="section-label">Handpoke Tattoo</span>
+    </div>
+    <div class="illus-grid">
+      <!-- 替换为你的纹身作品图 -->
+      <div class="illus-item"><img src="images/tattoo-01.jpg" alt="Tattoo 01"></div>
+      <div class="illus-item"><img src="images/tattoo-02.jpg" alt="Tattoo 02"></div>
+      <div class="illus-item"><img src="images/tattoo-03.jpg" alt="Tattoo 03"></div>
+      <div class="illus-item"><img src="images/tattoo-04.jpg" alt="Tattoo 04"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-header">
+      <h2 class="section-title">关于我</h2>
+      <span class="section-label">About</span>
+    </div>
+    <div class="about-layout">
+      <div class="about-portrait">
+        <!-- 替换为你的照片 -->
+        <img src="images/portrait.jpg" alt="Amo Zhou">
+      </div>
+      <div class="about-content">
+        <h3 class="about-name">Amo Zhou</h3>
+        <p class="about-role">Illustrator, Animator, Tattoo Artist</p>
+        <p class="about-text">
+          现居深圳，在一家服装公司担任图案设计师。喜欢在万物之间感受细小的能量——雨的气味、猫咪的温度、一个图案里藏着的小小世界。
+        </p>
+        <p class="about-text">
+          设计于我，是捕捉那些说不清楚、却真实存在的感受，然后找到一种方式让它们生长出来。我喜欢手绘的质感、柔和的色彩，和那种不经意的美。
+        </p>
+        <p class="about-text">
+          有时候也做音乐。会弹吉他，对迷幻电子很着迷。
+        </p>
+        <div class="about-tags">
+          <span class="tag">插画</span>
+          <span class="tag">服装图案</span>
+          <span class="tag">动态影像</span>
+          <span class="tag">手戳纹身</span>
+          <span class="tag">AI辅助创作</span>
+        </div>
+        <a href="mailto:hello@example.com" class="contact-link">联系我 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Amo Zhou · Illustrator, Animator, Tattoo Artist · Shenzhen 2025</p>
+</footer>
+
+<!-- PROJECT MODALS -->
+<div class="modal-overlay" id="modal1" onclick="closeModal(event,'modal1')">
+  <div class="modal-box">
+    <button class="modal-close">✕</button>
+    <h3 class="modal-title">春日图案系列</h3>
+    <span class="modal-tag">丝巾设计 · 2024</span>
+    <div class="modal-images">
+      <div class="modal-img-slot"><img src="images/project-01-01.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-01-02.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-01-03.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-01-04.jpg" alt=""></div>
+    </div>
+    <p class="modal-desc">以春天花卉为主题的丝巾图案设计，包含多款配色方案。灵感来源于江南园林与日式植物图鉴的交融，用细腻的线条捕捉花瓣展开瞬间的轻盈感。</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal2" onclick="closeModal(event,'modal2')">
+  <div class="modal-box">
+    <button class="modal-close">✕</button>
+    <h3 class="modal-title">几何纹样内衬</h3>
+    <span class="modal-tag">内衬图案 · 2024</span>
+    <div class="modal-images">
+      <div class="modal-img-slot"><img src="images/project-02-01.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-02-02.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-02-03.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-02-04.jpg" alt=""></div>
+    </div>
+    <p class="modal-desc">服装内衬几何图案设计，融合东西方传统纹样元素。以重复的菱形与花形为基础结构，在精密的几何关系中寻找柔和的呼吸感。</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal3" onclick="closeModal(event,'modal3')">
+  <div class="modal-box">
+    <button class="modal-close">✕</button>
+    <h3 class="modal-title">自然系列印花</h3>
+    <span class="modal-tag">品牌图案 · 2025</span>
+    <div class="modal-images">
+      <div class="modal-img-slot"><img src="images/project-03-01.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-03-02.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-03-03.jpg" alt=""></div>
+      <div class="modal-img-slot"><img src="images/project-03-04.jpg" alt=""></div>
+    </div>
+    <p class="modal-desc">以自然元素为灵感的印花图案系列，适用于多种服装品类。收录了山、水、云、石等意象，用当代的方式重新诠释东方自然美学。</p>
+  </div>
+</div>
+
+<!-- GALLERY OVERLAY -->
+<div id="galleryOverlay" class="gallery-overlay">
+  <div class="gallery-header">
+    <span class="gallery-title-display" id="galleryTitleDisplay"></span>
+    <button class="gallery-close" onclick="closeGallery()">✕ 关闭</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</div>
+
+<script>
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e, id) {
+  if (e.target === document.getElementById(id)) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+document.querySelectorAll('.modal-close').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  });
+});
+
+function openGallery(sectionId, title) {
+  const section = document.getElementById(sectionId);
+  const imgs = Array.from(section.querySelectorAll('img')).filter(img => !img.closest('.project-info'));
+  const grid = document.getElementById('galleryGrid');
+  document.getElementById('galleryTitleDisplay').textContent = title;
+  grid.innerHTML = '';
+  imgs.forEach(img => {
+    const div = document.createElement('div');
+    div.className = 'gallery-img';
+    const i = document.createElement('img');
+    i.src = img.src;
+    i.alt = img.alt || '';
+    div.appendChild(i);
+    grid.appendChild(div);
+  });
+  document.getElementById('galleryOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeGallery() {
+  document.getElementById('galleryOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>
